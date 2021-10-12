@@ -3,8 +3,9 @@
     text-align: center;
     line-height: 40px;
 }
-.search-container input{
-    width: 55%;
+.search-container input {
+    width: 37%;
+    padding: 4px;
 }
 .shop-container{
     display: grid;

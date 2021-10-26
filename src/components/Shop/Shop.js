@@ -9,15 +9,18 @@ const Shop = () => {
 	const [cart, setCart] = useState([]);
 	// products to the render on the UI
 	const [displayProducts, setDisplayProducts] = useState([]);
-
+	const [pageCount, setPageCount] = useState(0);
 	useEffect(() => {
 		// console.log('api called');
 		fetch("http://localhost:5000/products")
 			.then((res) => res.json())
 			.then((data) => {
-				setProducts(data);
-				setDisplayProducts(data);
+				setProducts(data.products);
+				setDisplayProducts(data.products);
 				// console.log('api received');
+				const count = data.count;
+				const pageNumber = Math.ceil(count / 10);
+				setPageCount(pageNumber);
 			});
 	}, []);
 

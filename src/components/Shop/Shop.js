@@ -80,37 +80,46 @@ const Shop = () => {
 					placeholder="search product"
 				/>
 			</div>
-			<div className="shop-container">
-				<div className="product-container">
-					{displayProducts.map((product) => (
-						<Product
-							key={product.key} //uniqe key use to removed consol warning
-							product={product}
-							handleAddToCart={handleAddToCart}
-						></Product>
-					))}
-					{/* pagination korar jonno   */}
-					<div className="pagination">
-						{[...Array(pageCount).keys()].map((number) => (
-							<button
-								// conditional css class
-								className={number === page ? "selected" : ""}
-								keys={number}
-								onClick={() => setPage(number)}
-							>
-								{number + 1}
-							</button>
+			{displayProducts.length === 0 ? (
+				<h2 style={{ textAlign: "center", color: "green", fontWeight: "bold" }}>
+					Loading{" "}
+					<strong style={{ fontSize: "70px" }}>
+						. .. ... .... ..... ....... ........... ..............
+					</strong>
+				</h2>
+			) : (
+				<div className="shop-container">
+					<div className="product-container">
+						{displayProducts.map((product) => (
+							<Product
+								key={product.key} //uniqe key use to removed consol warning
+								product={product}
+								handleAddToCart={handleAddToCart}
+							></Product>
 						))}
+						{/* pagination korar jonno   */}
+						<div className="pagination">
+							{[...Array(pageCount).keys()].map((number) => (
+								<button
+									// conditional css class
+									className={number === page ? "selected" : ""}
+									keys={number}
+									onClick={() => setPage(number)}
+								>
+									{number + 1}
+								</button>
+							))}
+						</div>
+					</div>
+					<div className="cart-container">
+						<Cart cart={cart}>
+							<Link to="/review">
+								<button className="btn-regular">order your review</button>
+							</Link>
+						</Cart>
 					</div>
 				</div>
-				<div className="cart-container">
-					<Cart cart={cart}>
-						<Link to="/review">
-							<button className="btn-regular">order your review</button>
-						</Link>
-					</Cart>
-				</div>
-			</div>
+			)}
 		</>
 	);
 };
